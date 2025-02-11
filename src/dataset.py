@@ -20,8 +20,8 @@ class HANDataset(Dataset):
         embedding_type="word2vec",
         pretrained_tokenizer_name="bert-base-uncased",
         vocab=None,
-        batch_size=2000,
-        n_process=8,
+        batch_size=None,
+        n_process=4,
     ):
         self.documents = documents
         self.labels = labels
@@ -80,7 +80,7 @@ class HANDataset(Dataset):
         sentences = list(doc.sents)
         sentences = sentences[: self.max_sentences]
         encoded = []
-        for sent in tqdm(sentences, "Encoding document"):
+        for sent in sentences:
             if self.embedding_type == "word2vec":
                 tokens = [token.text for token in sent]
                 tokens = tokens[: self.max_sentence_length]
@@ -110,7 +110,7 @@ class HANDataset(Dataset):
         return encoded
 
     def __len__(self):
-        len(self.documents)
+        return len(self.documents)
 
     def __getitem__(self, idx):
         doc = self.tokenized_docs[idx]
