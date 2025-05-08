@@ -1,14 +1,49 @@
-https://business.yelp.com/data/resources/open-dataset/
+# CS410 Tech Review
 
-https://rpubs.com/limminchim/dsscapstone-005a-v1
-https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/yelp_dataset_challenge_academic_dataset.zip
+Please note that this code may take a relative while to run the first time when creating the cache.
 
-# Differences
-Used a different tokenizer. The one used in the paper, Stanford's CoreNLP, requires a running server to be able to call within the Python script.
+## Getting Started
 
-# Getting Started
-Install uv: MacOS/Linux `curl -LsSf https://astral.sh/uv/install.sh | sh` or Windows `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+This code uses `uv` to manage the dependencies. The documentation for `uv` can be found here: <https://docs.astral.sh/uv/>
 
-Create swap memory: https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04
+Once it is installed, please download the dependencies using:
 
-`uv run python -m space download en_core_web_sm`
+```
+uv sync
+```
+
+It should automatically download GPU accelerated libraries for both Linux and Windows environments. Ideally, everything should "just work".
+
+Download the spacy model
+
+```
+uv run python -m spacy download en_core_web_sm
+```
+
+Finally, start the application
+
+```
+uv run cs410-han
+```
+
+OR
+
+```
+uv run -m cs410_han
+```
+
+## Graphs
+
+Create the graphs by running either of the below.
+
+```
+uv run scripts/graph1.py
+```
+
+```
+uv run scripts/graph2.py
+```
+
+## Notes
+
+- Used Spacy instead of Stanford CoreNLP due to the additional setup and dependencies.
